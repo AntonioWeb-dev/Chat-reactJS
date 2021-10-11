@@ -9,7 +9,7 @@ const rooms = [
     {
         "_id": "615a0b00ba406b5318e03dcb",
         "ownerId": "61561b51ef29d3146c1a068b",
-        "name": "sala de fisica",
+        "name": "sala de aleatoria 1",
         "admins": [
             "61561b51ef29d3146c1a068b"
         ],
@@ -22,7 +22,7 @@ const rooms = [
     {
         "_id": "615a0b00ba406b5318e03dcb",
         "ownerId": "61561b51ef29d3146c1a068b",
-        "name": "sala de pt",
+        "name": "sala de aleatoria 2",
         "admins": [
             "61561b51ef29d3146c1a068b"
         ],
@@ -35,7 +35,202 @@ const rooms = [
     {
         "_id": "615a0b00ba406b5318e03dcb",
         "ownerId": "61561b51ef29d3146c1a068b",
-        "name": "sala de mtm",
+        "name": "sala de aleatoria 3",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 1",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 2",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 3",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 1",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 2",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 3",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 1",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 2",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 3",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 1",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 2",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 3",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 1",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 2",
+        "admins": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "members": [
+            "61561b51ef29d3146c1a068b"
+        ],
+        "maxConnections": 4,
+        "__v": 0
+    },
+    {
+        "_id": "615a0b00ba406b5318e03dcb",
+        "ownerId": "61561b51ef29d3146c1a068b",
+        "name": "sala de aleatoria 3",
         "admins": [
             "61561b51ef29d3146c1a068b"
         ],
@@ -48,6 +243,7 @@ const rooms = [
 ]
 
 export default function Main() {
+    const roomSected = "sala aleatoria 1"
     return (
         <Container>
             <MainDiv>
@@ -66,11 +262,14 @@ export default function Main() {
                             <HiMenu size={29} />
                         </div>
                     </header>
-                    {rooms.map(room =>
-                        <Room roomName={room.name} roomSubject="any" />
-                    )}
+                    <div className="rooms">
+
+                        {rooms.map(room =>
+                            <Room roomName={room.name} roomSubject="any" />
+                        )}
+                    </div>
                 </Rooms>
-                <Chat />
+                <Chat Name={roomSected} />
             </MainDiv>
         </Container>
     )

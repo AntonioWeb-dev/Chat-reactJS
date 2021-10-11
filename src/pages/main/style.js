@@ -10,8 +10,8 @@ export const Container = styled.div`
 
 export const MainDiv = styled.div`
   background: white;
-  width: 75%;
-  min-height: 90%;
+  min-width: 1680px;
+  height: 90%;
   display: grid;
   grid-template-columns: 1fr 3fr;
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
@@ -19,7 +19,8 @@ export const MainDiv = styled.div`
 
 export const Rooms = styled.div`
   width: 100%;
-  box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.1);
 
   .header-room {
     height: 7%;
@@ -32,6 +33,26 @@ export const Rooms = styled.div`
 
     span {
       font-size: 20px;
+    }
+  }
+  .rooms {
+    height: 798px;
+    overflow: auto;
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #bdbbbb;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #bdbbbb;
     }
   }
 `;
