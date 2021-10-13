@@ -11,7 +11,7 @@ export const Container = styled.div`
     z-index: 2;
     background: #0078e7;
     width: 680px;
-    height: 75%;
+    height: 84%;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 26px;
     display: flex;
@@ -55,7 +55,7 @@ export const RegisterForm = styled.form`
   margin-left: 300px;
   background: white;
   width: 680px;
-  height: 58%;
+  height: 76%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,13 +67,44 @@ export const RegisterForm = styled.form`
     font-family: "Poppins", sans-serif;
     color: #0078e7;
     padding-bottom: 55px;
+    text-align: center;
   }
   .form-container {
     width: 75%;
-    height: 75%;
+    height: 90%;
     display: grid;
-    grid-template-rows: repeat(5, 80px);
+    grid-template-rows: 80px 155px repeat(5, 80px);
     align-items: center;
     justify-content: center;
+
+    .error {
+      font-family: sans-serif;
+      color: #db3b3b;
+      margin: 8px;
+    }
+  }
+  .avatar {
+    position: relative;
+    width: 300px;
+    height: 167px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    #avatar-icon {
+      margin-left: 3px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+    label {
+      cursor: pointer;
+      background: #82aefa;
+      padding: 7px;
+      border-radius: 10px;
+      font-family: "Poppins", sans-serif;
+      color: white;
+    }
   }
 `;

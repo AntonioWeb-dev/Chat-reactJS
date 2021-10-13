@@ -1,39 +1,96 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FaUserCircle } from 'react-icons/fa';
 import { Container, RegisterForm } from "./style";
 import { InputText } from "../../components/input-text";
-import { useFormik } from "formik";
 import { ButtonSend } from '../../components/button-send';
-import { Link } from 'react-router-dom';
+import {
+  emailValidation,
+  nameValidation,
+  passwordMatchValidation,
+  passwordValidation
+} from '../../validations';
 
 function RegisterPage() {
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-    },
-    onSubmit: values => {
-      console.log(values)
-    },
-  });
+  const [file, setFile] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [errors, setErrors] = useState({});
+
+  const validate = () => {
+    let errors = {};
+    errors.email = emailValidation(email);
+    errors.name = nameValidation(name);
+    errors.password = passwordValidation(password);
+    errors.passwordNotMatch = passwordMatchValidation(password, confirmPassword);
+    return errors
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const errorsFound = validate();
+    if (errorsFound) {
+      setErrors(errorsFound)
+      return;
+    }
+  }
   return (
     <Container>
 
-      <RegisterForm onSubmit={formik.handleSubmit}>
+      <RegisterForm onSubmit={handleSubmit}>
         <div className="form-container">
           <h1 id="title">NextWorld</h1>
-          <InputText
-            NameInput="Name"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-          />
-          <InputText
-            NameInput="Email"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-          />
-          <InputText
-            NameInput="Age"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-          />
+          <div className="avatar">
+            <div id="avatar-icon">
+              <FaUserCircle size={113} color={"#2e75f0"} />
+            </div>
+            <div className="profile-image">
+              <label htmlFor="avatar">Foto de perfil</label>
+              <input type="file" id="avatar" name="avatar" onChange={(e) => setFile(e.target.value)} />
+            </div>
+          </div>
+
+          <div>
+
+            <InputText
+              NameInput="Nome"
+              handleChange={setName}
+              value={name}
+            />
+            {errors.name ? <div className="error">{errors.name}</div> : null}
+          </div>
+          <div>
+
+            <InputText
+              NameInput="E-mail"
+              handleChange={setEmail}
+              value={email}
+            />
+            {errors.email ? <div className="error">{errors.email}</div> : null}
+          </div>
+          <div>
+
+            <InputText
+              NameInput="Senha"
+              handleChange={setPassword}
+              value={password}
+            />
+            {errors.password ? <div className="error">{errors.password}</div> : null}
+
+          </div>
+          <div>
+
+            <InputText
+              NameInput="Confirmar senha"
+              handleChange={setConfirmPassword}
+              value={confirmPassword}
+            />
+            {errors.passwordNotMatch ? <div className="error">{errors.passwordNotMatch}</div> : null}
+
+          </div>
           <ButtonSend Name="Registrar" />
         </div>
       </RegisterForm>

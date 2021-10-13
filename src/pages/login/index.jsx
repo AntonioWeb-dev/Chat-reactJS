@@ -38,6 +38,7 @@ function LoginPage() {
       <LoginForm onSubmit={handleSubmit}>
         <div className="container-form">
           <h1 id="title">NextWorld</h1>
+
           <InputText
             NameInput="Name"
             handleChange={setName}
