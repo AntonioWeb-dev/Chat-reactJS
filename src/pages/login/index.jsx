@@ -1,37 +1,53 @@
-import { useState } from 'react';
-import { isEmail } from "validator";
-import { InputText } from '../../components/input-text';
+import { useContext, useState } from "react";
+import { InputText } from "../../components/input-text";
 import { Container, LoginForm } from "./style";
 import { ButtonSend } from "../../components/button-send";
+import { Axios } from "../../services/axios";
+import { emailValidation, passwordValidation } from "../../validations";
+import { UserContext } from '../../context/userContext';
+import { useHistory } from 'react-router';
 
 function LoginPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const context = useContext(UserContext);
+  const history = useHistory();
+
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({
-    name: '',
-    email: ''
-  })
-  const [rememberUser, setRememberUser] = useState('');
+    password: "",
+    email: ""
+  });
+  const [rememberUser, setRememberUser] = useState("");
 
   const validate = () => {
     let errors = {};
-    if (!email || !isEmail(email)) {
-      errors.email = "Email invalido"
+    if (passwordValidation(password)) {
+      errors.password = 'Senha inválida';
     }
-    if (!name || name.length < 3) {
-      errors.name = "Nome invalido"
+    if (emailValidation(email)) {
+      errors.email = 'E-mail inválido';
     }
-    return errors
-  }
+    return errors;
+  };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrors({});
     const errorsFound = validate();
-    if (errorsFound) {
-      setErrors(errorsFound)
+    if (Object.keys(errorsFound).length > 0) {
+      setErrors(errorsFound);
       return;
     }
-  }
+    const data = {
+      email,
+      password
+    };
+    const result = await Axios.post("/login", data);
+    if (result.status === 200) {
+      context.login({ ...result.data })
+      history.push('/chat');
+    }
+  };
 
   return (
     <Container>
@@ -40,24 +56,32 @@ function LoginPage() {
           <h1 id="title">NextWorld</h1>
 
           <InputText
-            NameInput="Name"
-            handleChange={setName}
-            value={name}
-          />
-          {errors.name ? <div className="error">{errors.name}</div> : null}
-          <InputText
             NameInput="Email"
             handleChange={setEmail}
             value={email}
+            typeInput="text"
           />
           {errors.email ? <div className="error">{errors.email}</div> : null}
+          <InputText
+            NameInput="Password"
+            handleChange={setPassword}
+            value={password}
+            typeInput="password"
+
+          />
+          {errors.password ? (
+            <div className="error">{errors.password}</div>
+          ) : null}
           <label htmlFor="remember-login" className="remember-user">
-            <input id="remember-login" type="checkbox" name="remember-login" onClick={() => setRememberUser(!rememberUser)} />
+            <input
+              id="remember-login"
+              type="checkbox"
+              name="remember-login"
+              onClick={() => setRememberUser(!rememberUser)}
+            />
             Lembrar usuario
           </label>
           <ButtonSend Name="Entrar" />
-
-
         </div>
       </LoginForm>
     </Container>

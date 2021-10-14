@@ -11,7 +11,7 @@ export const Container = styled.div`
     z-index: 2;
     background: #0078e7;
     width: 680px;
-    height: 84%;
+    height: 844px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 26px;
     display: flex;
@@ -20,7 +20,7 @@ export const Container = styled.div`
     justify-content: center;
     text-align: center;
     font-family: "Robot", sans-serif;
-    color: #282829;
+    color: white;
     .login-button {
       margin: 30px 0px 0px 0px;
     }
@@ -47,15 +47,22 @@ export const Container = styled.div`
       font-size: 20px;
     }
   }
+  @media (max-width: 890px), (max-height: 770px) {
+    background: white;
+
+    #info {
+      display: none;
+    }
+  }
 `;
 
 export const RegisterForm = styled.form`
   z-index: 2;
 
-  margin-left: 300px;
+  margin-left: 150px;
   background: white;
   width: 680px;
-  height: 76%;
+  height: 755px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,14 +73,14 @@ export const RegisterForm = styled.form`
     font-size: 44px;
     font-family: "Poppins", sans-serif;
     color: #0078e7;
-    padding-bottom: 55px;
+    padding-bottom: 25px;
     text-align: center;
   }
   .form-container {
     width: 75%;
     height: 90%;
     display: grid;
-    grid-template-rows: 80px 155px repeat(5, 80px);
+    grid-template-rows: 20px 170px repeat(5, 1fr);
     align-items: center;
     justify-content: center;
 
@@ -83,11 +90,58 @@ export const RegisterForm = styled.form`
       margin: 8px;
     }
   }
+  // responsive
+  @media (max-width: 890px), (max-height: 770px) {
+    width: 780px;
+    height: 100%;
+    margin-left: 0px;
+
+    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0);
+    .form-container {
+      align-items: center;
+      justify-content: start;
+      height: 70%;
+      width: 88%;
+      #title {
+        grid-area: title;
+      }
+      .name {
+        grid-area: name;
+      }
+      .email {
+        grid-area: email;
+      }
+      .pwd {
+        grid-area: pwd;
+      }
+      .confirm-pwd {
+        grid-area: confirm-pwd;
+      }
+      .avatar {
+        grid-area: avatar;
+        width: 150px;
+        margin-bottom: 40px;
+      }
+      .button-send {
+        grid-area: button-send;
+        margin-left: 110px;
+      }
+      grid-template-columns: repeat(auto-fill, 200px);
+      grid-template-areas:
+        "title title title"
+        "avatar name email"
+        "avatar pwd confirm-pwd"
+        "avatar pwd confirm-pwd"
+        "avatar button-send button-send";
+    }
+  }
+
+  // avatar icon
   .avatar {
-    position: relative;
     width: 300px;
-    height: 167px;
+    height: 62%;
     display: grid;
+    gap: 15px;
     align-items: center;
     justify-content: center;
 

@@ -19,4 +19,13 @@ export const DivInput = styled.div`
   input:focus {
     border-bottom: 1px solid #fdb600;
   }
+
+  @media (max-width: 890px), (max-height: 770px) {
+    label {
+      padding: 7px 0px 2px 2px;
+    }
+    input {
+      width: 150px;
+    }
+  }
 `;
