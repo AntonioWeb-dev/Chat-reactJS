@@ -3,13 +3,15 @@ import styled from "styled-components";
 export const ChatDiv = styled.div`
   width: 100%;
   border-left: 1px solid #d1d1d1;
-
   max-height: 100%;
+  display: grid;
+  grid-template-rows: 9vh 75vh 5vh;
 
   .header-chat {
-    height: 7%;
+    /* height: 9vh; */
+    padding-left: 10px;
     display: grid;
-    grid-template-columns: 5% 87% 3%;
+    grid-template-columns: 60px 8fr 1fr;
     justify-content: center;
     align-items: center;
     font-family: "Roboto";
@@ -19,11 +21,18 @@ export const ChatDiv = styled.div`
       font-size: 20px;
     }
   }
+  @media (max-width: 936px) {
+    grid-template-rows: 9vh 81vh 9vh;
+
+    .header-chat {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 export const MessagesDiv = styled.div`
   width: 100%;
-  height: 755px;
+  height: auto;
   overflow: auto;
 
   ::-webkit-scrollbar {
@@ -64,34 +73,6 @@ export const Message = styled.div`
 
     p {
       padding: 4px;
-    }
-  }
-`;
-
-export const SendMessage = styled.div`
-  width: 100%;
-
-  height: 5%;
-  display: flex;
-  gap: 25px;
-  align-items: center;
-  justify-content: center;
-  input {
-    height: 40%;
-    width: 88%;
-    border-radius: 26px;
-    outline: none;
-    padding: 10px;
-    border: #ddd solid 2px;
-    margin-bottom: 9px;
-  }
-  button {
-    border: none;
-    background: none;
-    margin-bottom: 5px;
-
-    :hover {
-      cursor: pointer;
     }
   }
 `;

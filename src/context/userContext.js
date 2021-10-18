@@ -2,7 +2,6 @@ import { createContext, useReducer } from "react";
 
 const UserContext = createContext({
   user: {},
-  isLoggedIn: false,
   login: (user) => {},
   logout: () => {},
 });
@@ -12,14 +11,12 @@ function userReducer(state, action) {
     case "LOGIN":
       return {
         ...state,
-        user: action,
-        isLoggedIn: true,
+        user: action.user,
       };
     case "LOGOUT":
       return {
         ...state,
         user: {},
-        isLoggedIn: false,
       };
     default:
       return state;
@@ -33,27 +30,28 @@ function getLoggedInState(dispatch, state) {
     if (user.isLoggedIn) {
       dispatch({
         type: "LOGIN",
-        isLoggedIn: true,
+        user,
       });
     }
   }
 }
 
 function UserProvider(props) {
-  const [state, dispatch] = useReducer(userReducer, {});
+  const [state, dispatch] = useReducer(userReducer, false);
   getLoggedInState(dispatch, state);
 
   function login(user) {
+    user.isLoggedIn = true;
     dispatch({
       type: "LOGIN",
-      ...user,
+      user,
     });
-    user.isLoggedIn = true;
     localStorage.setItem("user", JSON.stringify(user));
   }
+
   function logout() {
     localStorage.removeItem("user");
-    dispatch({ type: "LOGOUT", isLoggedIn: false });
+    dispatch({ type: "LOGOUT", user: {} });
   }
 
   return <UserContext.Provider value={{ user: state, login, logout }} {...props} />;
