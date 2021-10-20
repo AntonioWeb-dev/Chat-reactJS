@@ -1,13 +1,18 @@
+import { useContext } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
+import { ChatContext } from '../../context/chatContext';
 import { DivRoom } from './style';
 
-export function Room({ roomName, roomSubject, room_id, selectRoom }) {
+export function Room({ roomName, roomSubject, room_id, socket }) {
+  const { changeRoom } = useContext(ChatContext);
+
   function handleSelectRoom() {
     const roomSelected = {
       name: roomName,
       _id: room_id,
     }
-    selectRoom(roomSelected)
+    changeRoom(roomSelected);
+    socket.emit('room', room_id);
   }
   return (
     <DivRoom onClick={handleSelectRoom}>

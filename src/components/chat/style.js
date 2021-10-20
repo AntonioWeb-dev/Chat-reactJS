@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const ChatDiv = styled.div`
   width: 100%;
   border-left: 1px solid #d1d1d1;
-  max-height: 100%;
+  height: 100%;
   display: grid;
-  grid-template-rows: 9vh 75vh 5vh;
+  grid-template-rows: 9vh 83vh 8vh;
 
   .header-chat {
     /* height: 9vh; */
@@ -15,14 +15,14 @@ export const ChatDiv = styled.div`
     justify-content: center;
     align-items: center;
     font-family: "Roboto";
-    background: #dedfe0;
+    background: white;
 
     span {
       font-size: 20px;
     }
   }
   @media (max-width: 936px) {
-    grid-template-rows: 9vh 81vh 9vh;
+    grid-template-rows: 9vh 83vh 8vh;
 
     .header-chat {
       font-size: 1.5rem;
@@ -54,25 +54,32 @@ export const MessagesDiv = styled.div`
 `;
 export const Message = styled.div`
   display: flex;
+  padding: 8px;
+  font-family: "Open Sans", sans-serif;
   flex-direction: ${(props) => (props.sameUser ? "row-reverse" : "row")};
-
+  .user-image {
+    display: flex;
+    flex-direction: column-reverse;
+  }
   .message-content {
-    background: ${(props) => (props.sameUser ? "#71b0eb" : "#9ff5d5")};
-    margin: 6px 18px 7px 18px;
+    background: ${(props) => (props.sameUser ? "#6b4bde" : "#d1d1d1")};
+    margin: 3px 10px 4px 10px;
     min-height: 40px;
     max-width: 200px;
     word-wrap: break-word;
-    border-radius: 4px;
+    border-radius: ${(props) => (props.sameUser ? "5px 5px 0px 5px" : "5px 5px 5px 0px")};
     text-align: ${(props) => (props.sameUser ? "end" : "initial")};
+    padding: 3px;
     span {
       padding: 8px;
       font-size: 15px;
       font-weight: bold;
-      color: #ed133b;
+      color: orange;
     }
 
     p {
       padding: 4px;
+      color: ${(props) => (props.sameUser ? "white" : "#454444")};
     }
   }
 `;

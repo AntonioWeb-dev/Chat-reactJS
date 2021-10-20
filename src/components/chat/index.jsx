@@ -1,52 +1,70 @@
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { Axios } from '../../services/axios';
 import { FormChat } from "../formChat";
-import { FaUserCircle } from 'react-icons/fa';
 import { HiMenu } from 'react-icons/hi';
+import { FaUserCircle } from 'react-icons/fa';
 import { ChatDiv, MessagesDiv, Message } from "./style";
-import { useEffect, useState } from 'react';
+import { ChatContext } from '../../context/chatContext';
 
-export function Chat({ roomSelected, socket, user }) {
-  const [messages, setMessages] = useState([]);
+export function Chat({ socket, user }) {
+  const [isLoading, setIsLoading] = useState(false);
+  const { room, messages, sendMessage } = useContext(ChatContext);
+  console.log(messages, room);
+
+  const getRoomMessages = useCallback(async () => {
+    const roomMessages = await Axios.get(`/messages/${room._id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + user.token,
+      }
+    }
+    );
+    sendMessage(roomMessages.data);
+  }, [room]);
+
+  useEffect(() => {
+    getRoomMessages()
+  }, [getRoomMessages]);
+
 
   useEffect(() => {
     socket.on('recive-message', (message) => {
-      setNewMessage(message);
+      const newMessages = [...messages];
+      newMessages.push(message);
+      sendMessage(newMessages);
     });
-  }, [socket, messages])
+  }, [socket, messages, sendMessage]);
 
+  if (!isLoading || !messages) <></>
+  if (messages.length === 0) {
 
-  function setNewMessage(message) {
-    const newMessages = messages;
-    newMessages.push(message);
-    setMessages([...newMessages]);
+    return (<h1>aa</h1>);
   }
-
-
-
   return (
     <ChatDiv>
       <header className="header-chat">
         <div className="avatar">
-          <FaUserCircle size={45} color={"#0078e7"} />
+          <FaUserCircle size={45} color={"#d1d1d1"} />
         </div>
-        <span>
-          {roomSelected.name}
-        </span>
+        <span>{room.name}</span>
 
         <div>
-          <HiMenu size={29} />
+          <HiMenu size={29} cursor={"pointer"} />
         </div>
       </header>
       <MessagesDiv>
         {messages.map(message => (
-          <Message key={message.message_id} sameUser={message.sender_id === user.user_id} >
+          <Message key={message._id} sameUser={message.sender.id === user.user_id} >
+            <div className="user-image">
+              <FaUserCircle size={30} color={"#d1d1d1"} cursor={"pointer"} />
+            </div>
             <div className="message-content">
-              <span>{message.sender_id === user.user_id ? "Você" : message.sender_name}</span>
+              <span>{message.sender.id === user.user_id ? "Você" : message.sender.name}</span>
               <p>{message.content}</p>
             </div>
           </Message>
         ))}
       </MessagesDiv>
-      <FormChat room={roomSelected} user={user} socket={socket} newMessage={setNewMessage} />
+      <FormChat user={user} socket={socket} />
     </ChatDiv>
   )
 }

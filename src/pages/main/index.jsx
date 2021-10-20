@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+import { ChatContext, ChatProvider } from '../../context/chatContext';
 import { Rooms } from '../../components/rooms';
 import { Container, MainDiv } from "./style";
 import { Chat } from '../../components/chat';
@@ -17,19 +18,17 @@ export default function Main() {
   });
 
 
-
-
-
   return (
     <Container>
       <MainDiv>
-        <Rooms user={user} socket={server} setRoomSelected={setRoomSelected} />
-        {roomSelected
-          ?
-          <Chat roomSelected={roomSelected} user={user} socket={server} />
-          :
-          <></>
-        }
+        <ChatProvider>
+          <Rooms user={user} socket={server} setRoomSelected={setRoomSelected} />
+          <Chat
+            roomSelected={roomSelected}
+            user={user}
+            socket={server}
+          />
+        </ChatProvider>
       </MainDiv>
     </Container>
   )

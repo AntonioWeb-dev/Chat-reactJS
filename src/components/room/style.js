@@ -5,20 +5,30 @@ export const DivRoom = styled.div`
   height: 10vh;
   display: grid;
   gap: 10px;
-  grid-template-columns: 18% 70%;
-  justify-content: center;
+  grid-template-columns: 15% 80%;
+  justify-content: start;
   align-items: center;
-  border-bottom: 1px solid #ddd;
-  cursor: pointer;
+  :hover {
+    background: #573db8;
+    cursor: pointer;
+  }
+  .avatar {
+    padding-left: 10px;
+  }
   .room-info {
     display: grid;
     span:first-child {
-      font-size: 20px;
+      font-size: 15px;
       font-family: sans-serif;
     }
-    span:nth-child(2) {
-      font-size: 15px;
-      font-family: "Roboto";
+    .last-message {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        font-size: 10px;
+        font-family: "Roboto";
+      }
     }
   }
 `;

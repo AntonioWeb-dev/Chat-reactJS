@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background: url("/images/SL-051919-20420-09.jpg");
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,10 +9,10 @@ export const Container = styled.div`
 
 export const MainDiv = styled.div`
   background: white;
-  min-width: 72%;
-  height: 90%;
+  width: 100%;
+  height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 4fr;
   box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
   @media (max-width: 936px) {
     grid-template-columns: 1fr;
