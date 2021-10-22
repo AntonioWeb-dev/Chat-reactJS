@@ -4,11 +4,13 @@ import { BsFiles, BsFillMicFill } from 'react-icons/bs';
 import { BiSend } from 'react-icons/bi';
 import { SendMessage } from './style';
 import { ChatContext } from '../../context/chatContext';
+import { UserContext } from '../../context/userContext';
 
 
-export function FormChat({ socket, user, }) {
+export function FormChat({ socket }) {
   const [text, setText] = useState('');
   const { room, messages, sendMessage } = useContext(ChatContext);
+  const { user } = useContext(UserContext).user;
 
 
   const mongoObjectId = function () {
@@ -24,18 +26,21 @@ export function FormChat({ socket, user, }) {
       content: text,
       sender: {
         name: user.name,
-        id: user.user_id,
+        _id: user.user_id,
         avatar: user.avatar,
         email: user.email,
       },
       isResponse: false,
       room_id: room._id,
-      _id: mongoObjectId()
+      _id: mongoObjectId(),
+      date: new Date()
     }
     socket.emit("send-message", message);
     const messagesUpdated = [...messages];
     messagesUpdated.push(message);
     sendMessage(messagesUpdated);
+    const divMessages = document.getElementById("Messages");
+    divMessages.scrollTop = divMessages.scrollHeight;
   }
   return (
     <SendMessage onSubmit={handleSubmit}>
@@ -47,10 +52,10 @@ export function FormChat({ socket, user, }) {
         <BsFiles size={25} color={"gray"} />
       </button>
       <button>
-        <AiOutlineCamera size={25} color={"gray"} />
+        <AiOutlineCamera size={30} color={"gray"} />
       </button>
       <button>
-        <BiSend color={"#71b0eb"} size={38} />
+        <BiSend color={"#407ee3"} size={38} />
       </button>
     </SendMessage>
   )

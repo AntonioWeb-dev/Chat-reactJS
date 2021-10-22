@@ -15,7 +15,6 @@ function chatReducer(state, action) {
         messages: action.payload,
       };
     case "CHANGE_ROOM":
-      console.log(action.payload);
       return {
         ...state,
         room: action.payload,

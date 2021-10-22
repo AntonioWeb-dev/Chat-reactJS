@@ -22,7 +22,7 @@ export default function Main() {
     <Container>
       <MainDiv>
         <ChatProvider>
-          <Rooms user={user} socket={server} setRoomSelected={setRoomSelected} />
+          <Rooms socket={server} setRoomSelected={setRoomSelected} />
           <Chat
             roomSelected={roomSelected}
             user={user}

@@ -5,18 +5,27 @@ export const DivRoom = styled.div`
   height: 10vh;
   display: grid;
   gap: 10px;
-  grid-template-columns: 15% 80%;
+  grid-template-columns: 0.5fr 3fr;
   justify-content: start;
   align-items: center;
+  border-bottom: 1px solid #33569c;
+  background: ${(props) => (props.roomSelected ? "#5865f2" : "none")};
   :hover {
-    background: #573db8;
+    background: #33569c;
     cursor: pointer;
   }
   .avatar {
     padding-left: 10px;
+    img {
+      object-fit: cover;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
   }
   .room-info {
     display: grid;
+    width: 95%;
     span:first-child {
       font-size: 15px;
       font-family: sans-serif;
@@ -26,8 +35,8 @@ export const DivRoom = styled.div`
       justify-content: space-between;
 
       span {
-        font-size: 10px;
-        font-family: "Roboto";
+        font-size: 12px;
+        font-family: "Open Sans";
       }
     }
   }

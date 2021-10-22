@@ -2,21 +2,19 @@ import styled from "styled-components";
 
 export const ChatDiv = styled.div`
   width: 100%;
-  border-left: 1px solid #d1d1d1;
-  height: 100%;
+  height: 99.8vh;
   display: grid;
-  grid-template-rows: 9vh 83vh 8vh;
+  grid-template-rows: 8vh 85.8vh 6vh;
 
   .header-chat {
     /* height: 9vh; */
     padding-left: 10px;
     display: grid;
-    grid-template-columns: 60px 8fr 1fr;
+    grid-template-columns: 60px 14fr 1fr;
     justify-content: center;
     align-items: center;
     font-family: "Roboto";
-    background: white;
-
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.1);
     span {
       font-size: 20px;
     }
@@ -60,21 +58,27 @@ export const Message = styled.div`
   .user-image {
     display: flex;
     flex-direction: column-reverse;
+    img {
+      object-fit: cover;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+    }
   }
   .message-content {
-    background: ${(props) => (props.sameUser ? "#6b4bde" : "#d1d1d1")};
+    background: ${(props) => (props.sameUser ? "#407ee3" : "none")};
     margin: 3px 10px 4px 10px;
     min-height: 40px;
     max-width: 200px;
     word-wrap: break-word;
-    border-radius: ${(props) => (props.sameUser ? "5px 5px 0px 5px" : "5px 5px 5px 0px")};
+    border-radius: ${(props) => (props.sameUser ? "10px 10px 0px 10px" : "10px 10px 10px 0px")};
     text-align: ${(props) => (props.sameUser ? "end" : "initial")};
     padding: 3px;
     span {
       padding: 8px;
       font-size: 15px;
       font-weight: bold;
-      color: orange;
+      color: #e3d040;
     }
 
     p {

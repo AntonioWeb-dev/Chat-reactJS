@@ -1,18 +1,20 @@
 import { useContext } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { ChatContext } from '../../context/chatContext';
+
 import { DivRoom } from './style';
 
-export function Room({ roomName, roomSubject, room_id, socket }) {
+export function Room({ room }) {
+  const { name, last_message, _id } = room;
   const { changeRoom } = useContext(ChatContext);
+  const date = new Date(last_message.date);
 
   function handleSelectRoom() {
     const roomSelected = {
-      name: roomName,
-      _id: room_id,
+      name,
+      _id
     }
     changeRoom(roomSelected);
-    socket.emit('room', room_id);
   }
   return (
     <DivRoom onClick={handleSelectRoom}>
@@ -21,11 +23,26 @@ export function Room({ roomName, roomSubject, room_id, socket }) {
       </div>
       <div className="room-info">
         <span>
-          {roomName}
+          {name}
         </span>
-        <span>
-          {roomSubject}
-        </span>
+        <div className="last-message">
+          <span >
+            {last_message.content
+              ?
+              last_message.content
+              :
+              undefined
+            }
+          </span>
+          <span>
+            {last_message.date
+              ?
+              `${date.getHours()}:${date.getMinutes()}`
+              :
+              undefined
+            }
+          </span>
+        </div>
       </div>
     </DivRoom>
   )
