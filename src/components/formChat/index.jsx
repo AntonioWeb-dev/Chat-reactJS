@@ -39,8 +39,6 @@ export function FormChat({ socket }) {
     const messagesUpdated = [...messages];
     messagesUpdated.push(message);
     sendMessage(messagesUpdated);
-    const divMessages = document.getElementById("Messages");
-    divMessages.scrollTop = divMessages.scrollHeight;
   }
   return (
     <SendMessage onSubmit={handleSubmit}>

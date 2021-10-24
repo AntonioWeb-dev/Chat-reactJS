@@ -17,7 +17,32 @@ export function Rooms({ socket }) {
     socket.on("yourRooms", (rooms) => {
       setRooms(rooms)
     });
+
+
   }, [socket])
+
+  console.log(rooms);
+  useEffect(() => {
+    if (rooms.length > 0) {
+      socket.on('recive-message', (last_message) => {
+
+
+        let roomIndex = -1;
+        for (let index in rooms) {
+          if (rooms[index]._id === last_message.room_id) {
+            roomIndex = index;
+          }
+        }
+
+        const newRooms = rooms;
+        newRooms[roomIndex].last_message = {
+          content: last_message.content,
+          date: last_message.date,
+        }
+        setRooms(newRooms);
+      });
+    }
+  }, [socket, rooms, setRooms]);
 
   return (
     <RoomsDiv newChat={newChat} >
@@ -56,7 +81,7 @@ export function Rooms({ socket }) {
         {
           newChat
             ?
-            <NewChat />
+            <NewChat handlerRoom={setRooms} rooms={rooms} handleNewChat={setNewChat} />
             :
 
             rooms.map(room =>

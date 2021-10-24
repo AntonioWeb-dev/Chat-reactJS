@@ -55,3 +55,33 @@ export const DivNewChat = styled.div`
     }
   }
 `;
+
+export const FormRoom = styled.form`
+  display: grid;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 19px;
+  input {
+    width: 100%;
+    color: #77787a;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    background: white;
+    border-radius: 6px;
+    padding: 7px;
+  }
+  button {
+    border: none;
+    border-radius: 4px;
+    padding: 4px;
+    width: 50%;
+    margin-left: 25%;
+    background: #284580;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+`;
