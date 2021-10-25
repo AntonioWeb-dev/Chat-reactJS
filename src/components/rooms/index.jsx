@@ -21,7 +21,6 @@ export function Rooms({ socket }) {
 
   }, [socket])
 
-  console.log(rooms);
   useEffect(() => {
     if (rooms.length > 0) {
       socket.on('recive-message', (last_message) => {
@@ -73,7 +72,7 @@ export function Rooms({ socket }) {
               <button>
                 <ImSearch size={20} color={"#9c9c9c"} />
               </button>
-              <input type="text" placeholder="Buscar conversa" />
+              <input type="text" autocomplete="off" placeholder="Buscar conversa" />
             </div>
         }
       </header>

@@ -81,7 +81,7 @@ export const RoomsDiv = styled.div`
       background: #bdbbbb;
     }
   }
-  @media (max-width: 936px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 `;

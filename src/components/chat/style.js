@@ -14,7 +14,7 @@ export const ChatDiv = styled.div`
     justify-content: center;
     align-items: center;
     font-family: "Roboto";
-    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.1);
+    box-shadow: -2px 2px 7px rgba(0, 0, 0, 0.1);
     span {
       font-size: 20px;
     }

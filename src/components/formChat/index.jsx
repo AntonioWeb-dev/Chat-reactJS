@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { BsFiles, BsFillMicFill } from 'react-icons/bs';
-import { BiSend } from 'react-icons/bi';
+import { IoMdSend } from 'react-icons/io';
 import { SendMessage } from './style';
 import { ChatContext } from '../../context/chatContext';
 import { UserContext } from '../../context/userContext';
@@ -39,10 +39,11 @@ export function FormChat({ socket }) {
     const messagesUpdated = [...messages];
     messagesUpdated.push(message);
     sendMessage(messagesUpdated);
+    setText('');
   }
   return (
     <SendMessage onSubmit={handleSubmit}>
-      <input type="text" name="text-message" placeholder="Escreva sua menssagem" onChange={e => setText(e.target.value)} />
+      <input type="text" name="text-message" value={text} autocomplete="off" placeholder="Escreva sua menssagem" onChange={e => setText(e.target.value)} />
       <button>
         <BsFillMicFill size={25} color={"gray"} />
       </button>
@@ -53,7 +54,7 @@ export function FormChat({ socket }) {
         <AiOutlineCamera size={30} color={"gray"} />
       </button>
       <button>
-        <BiSend color={"#407ee3"} size={38} />
+        <IoMdSend color={"gray"} size={38} />
       </button>
     </SendMessage>
   )

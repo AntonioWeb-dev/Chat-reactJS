@@ -5,16 +5,12 @@ import { ChatContext } from '../../context/chatContext';
 import { DivRoom } from './style';
 
 export function Room({ room }) {
-  const { name, last_message, _id } = room;
+  const { name, last_message } = room;
   const { changeRoom } = useContext(ChatContext);
   const date = new Date(last_message.date);
 
   function handleSelectRoom() {
-    const roomSelected = {
-      name,
-      _id
-    }
-    changeRoom(roomSelected);
+    changeRoom(room);
   }
   return (
     <DivRoom onClick={handleSelectRoom}>

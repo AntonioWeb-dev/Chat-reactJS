@@ -5,6 +5,7 @@ import { Container, MainDiv } from "./style";
 import { Chat } from '../../components/chat';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../context/userContext';
+import { RoomInfo } from '../../components/room-info';
 
 
 export default function Main() {
@@ -34,7 +35,7 @@ export default function Main() {
           {
             roomInfo
               ?
-              <div>ola</div>
+              <RoomInfo />
               :
               null
           }
