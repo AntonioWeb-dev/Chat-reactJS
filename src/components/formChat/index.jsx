@@ -9,7 +9,7 @@ import { UserContext } from '../../context/userContext';
 
 export function FormChat({ socket }) {
   const [text, setText] = useState('');
-  const { room, messages, sendMessage } = useContext(ChatContext);
+  const { room, sendMessage } = useContext(ChatContext);
   const { user } = useContext(UserContext).user;
 
 
@@ -22,6 +22,11 @@ export function FormChat({ socket }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!text) {
+      return;
+    }
+
+    //create a message to send 
     const message = {
       content: text,
       sender: {
@@ -35,15 +40,14 @@ export function FormChat({ socket }) {
       _id: mongoObjectId(),
       date: new Date()
     }
+
     socket.emit("send-message", message);
-    const messagesUpdated = [...messages];
-    messagesUpdated.push(message);
-    sendMessage(messagesUpdated);
+    sendMessage(message);
     setText('');
   }
   return (
     <SendMessage onSubmit={handleSubmit}>
-      <input type="text" name="text-message" value={text} autocomplete="off" placeholder="Escreva sua menssagem" onChange={e => setText(e.target.value)} />
+      <input type="text" name="text-message" value={text} autoComplete="off" placeholder="Escreva sua menssagem" onChange={e => setText(e.target.value)} />
       <button>
         <BsFillMicFill size={25} color={"gray"} />
       </button>

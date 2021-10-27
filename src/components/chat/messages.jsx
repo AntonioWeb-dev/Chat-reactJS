@@ -1,8 +1,7 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { ChatContext } from '../../context/chatContext';
 import { UserContext } from '../../context/userContext';
-import { Axios } from '../../services/axios';
 import { Message, MessagesDiv } from './style';
 
 export function Messages() {
@@ -10,38 +9,19 @@ export function Messages() {
   const { user } = useContext(UserContext).user;
   const [isLoading, setIsLoading] = useState(false);
 
+
+
+  // scrollingDown - scroll to the bottom of messages when some message is  sent
   const scrollingDown = () => {
     const divMessages = document.getElementById("Messages");
     divMessages.scrollTop = divMessages.scrollHeight;
   }
-
-  const getRoomMessages = useCallback(async () => {
-    const roomMessages = await Axios.get(`/messages/${room._id}`, {
-      headers: {
-        'Authorization': 'Bearer ' + user.token,
-      }
-    }
-    );
-    sendMessage(roomMessages.data);
-    scrollingDown();
-
-  }, [room]);
-
   useEffect(() => {
     scrollingDown()
-  }, [sendMessage])
+  }, [sendMessage]);
 
 
-
-  // useEffect send a request to /messages/:room_id to get room's messages
-  useEffect(() => {
-    getRoomMessages()
-  }, [getRoomMessages]);
-
-
-
-
-  // All rooms recive the message because i've joined all of them, so there is a codition 
+  // All rooms recive the message because i joined all of rooms, so there is a codition 
   // that must verify room_id of the message and the room selected 
 
   if (!isLoading || !messages) <></>

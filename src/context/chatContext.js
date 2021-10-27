@@ -9,10 +9,17 @@ const ChatContext = createContext({
 
 function chatReducer(state, action) {
   switch (action.type) {
-    case "SEND_MESSAGE":
+    case "SET_MESSAGES":
       return {
         ...state,
         messages: action.payload,
+      };
+    case "SEND_MESSAGE":
+      const newMessages = [...state.messages];
+      newMessages.push(action.payload);
+      return {
+        ...state,
+        messages: newMessages,
       };
     case "CHANGE_ROOM":
       return {
@@ -34,13 +41,20 @@ function ChatProvider(props) {
     });
   }
 
+  function setMessages(messages) {
+    dispatch({
+      type: "SET_MESSAGES",
+      payload: messages,
+    });
+  }
+
   function changeRoom(room) {
     dispatch({ type: "CHANGE_ROOM", payload: room });
   }
 
   return (
     <ChatContext.Provider
-      value={{ messages: state.messages, room: state.room, sendMessage, changeRoom }}
+      value={{ messages: state.messages, room: state.room, sendMessage, changeRoom, setMessages }}
       {...props}
     />
   );

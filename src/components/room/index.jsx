@@ -15,14 +15,20 @@ export function Room({ room }) {
   return (
     <DivRoom onClick={handleSelectRoom}>
       <div className="avatar">
-        <FaUserCircle size={45} color={"#ddd"} />
+        {
+          room.room_avatar !== 'undefined'
+            ?
+            <img src={room.room_avatar} alt="room" />
+            :
+            <FaUserCircle size={45} color={"#ddd"} />
+        }
       </div>
       <div className="room-info">
         <span>
           {name}
         </span>
         <div className="last-message">
-          <span >
+          <span className="content">
             {last_message.content
               ?
               last_message.content

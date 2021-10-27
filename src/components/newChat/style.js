@@ -58,15 +58,39 @@ export const DivNewChat = styled.div`
 
 export const FormRoom = styled.form`
   display: grid;
-  margin-top: 10px;
-  align-items: center;
+  margin-top: 13px;
   justify-content: center;
   gap: 8px;
   font-size: 19px;
+  .avatar {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    img {
+      object-fit: cover;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+    input {
+      display: none;
+    }
+    label {
+      background: #ebba34;
+      padding: 4px;
+      border-radius: 3px;
+      font-family: "Poppins";
+      font-size: 14px;
+      font-weight: bold;
+      :hover {
+        background: #e8b21e;
+      }
+    }
+  }
   input {
     width: 100%;
     color: #77787a;
-    font-weight: bold;
     outline: none;
     border: none;
     background: white;
@@ -83,5 +107,11 @@ export const FormRoom = styled.form`
     color: white;
     font-weight: bold;
     font-size: 16px;
+    transition: all 0.4s;
+    :hover {
+      background: #0d3482;
+      cursor: pointer;
+      transform: translateY(-1px);
+    }
   }
 `;

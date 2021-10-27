@@ -47,7 +47,6 @@ function RegisterPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrors({});
-    console.log(errors);
     const errorsFound = validate();
     if (Object.keys(errorsFound).length > 0) {
       setErrors(errorsFound)
@@ -60,7 +59,6 @@ function RegisterPage() {
       "password": password
     }
     const formData = new FormData();
-    console.log(file)
     formData.append('body', JSON.stringify(data));
     formData.append('avatar', file);
     const result = await axios.post('http://localhost:3100/users', formData,

@@ -35,7 +35,7 @@ export default function Main() {
           {
             roomInfo
               ?
-              <RoomInfo />
+              <RoomInfo socket={server} />
               :
               null
           }

@@ -34,6 +34,11 @@ export const DivRoom = styled.div`
       display: flex;
       justify-content: space-between;
 
+      .content {
+        width: 100px;
+        overflow: hidden;
+      }
+
       span {
         font-size: 12px;
         font-family: "Open Sans";

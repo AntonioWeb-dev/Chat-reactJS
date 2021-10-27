@@ -32,8 +32,10 @@ export const DivRoomInfo = styled.div`
       justify-content: center;
       padding: 20px;
       img {
+        object-fit: cover;
         width: 150px;
         height: 150px;
+        border-radius: 50%;
       }
     }
     .roomInfo {
@@ -66,14 +68,20 @@ export const DivRoomInfo = styled.div`
     margin-bottom: 20px;
 
     button {
+      border: 1px solid blue;
       background: #ed5151;
       color: white;
-      font-size: 18px;
+      font-size: 15px;
       font-weight: bold;
       font-family: "Open sans";
       border: none;
       border-radius: 10px;
       padding: 8px 120px 8px 120px;
+      transition: all 0.4s;
+      :hover {
+        background: #d11111;
+        transform: translateY(-2px);
+      }
     }
   }
 `;

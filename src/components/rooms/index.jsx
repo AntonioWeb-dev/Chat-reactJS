@@ -17,15 +17,11 @@ export function Rooms({ socket }) {
     socket.on("yourRooms", (rooms) => {
       setRooms(rooms)
     });
-
-
   }, [socket])
 
   useEffect(() => {
     if (rooms.length > 0) {
       socket.on('recive-message', (last_message) => {
-
-
         let roomIndex = -1;
         for (let index in rooms) {
           if (rooms[index]._id === last_message.room_id) {
@@ -64,15 +60,16 @@ export function Rooms({ socket }) {
           </div>
         </div>
         {
+          // search room or user
           newChat
             ?
-            <div></div>
+            null
             :
             <div className="search-div">
               <button>
                 <ImSearch size={20} color={"#9c9c9c"} />
               </button>
-              <input type="text" autocomplete="off" placeholder="Buscar conversa" />
+              <input type="text" autoComplete="off" placeholder="Buscar conversa" />
             </div>
         }
       </header>
@@ -82,7 +79,6 @@ export function Rooms({ socket }) {
             ?
             <NewChat handlerRoom={setRooms} rooms={rooms} handleNewChat={setNewChat} />
             :
-
             rooms.map(room =>
               <Room
                 key={room._id}

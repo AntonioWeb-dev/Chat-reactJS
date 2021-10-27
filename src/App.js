@@ -7,7 +7,7 @@ import "./app.css";
 function App() {
   return (
     <UserProvider>
-      <BrowserRouter>
+      <BrowserRouter forceRefresh>
         <Routes />
         <GlobalStyle />
       </BrowserRouter>

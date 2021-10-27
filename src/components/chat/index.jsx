@@ -1,29 +1,55 @@
-import { useContext, useEffect } from 'react';
-import { FormChat } from "../formChat";
+import { useCallback, useContext, useEffect } from 'react';
+import { Axios } from '../../services/axios';
 import { HiMenu } from 'react-icons/hi';
+import { FormChat } from "../formChat";
 import { FaUserCircle } from 'react-icons/fa';
 import { ChatDiv } from "./style";
 import { ChatContext } from '../../context/chatContext';
 import { Messages } from './messages';
+import { UserContext } from '../../context/userContext';
 
 export function Chat({ socket, setRoomInfo, roomInfo }) {
-  const { room, messages, sendMessage } = useContext(ChatContext);
+  const { room, messages, setMessages } = useContext(ChatContext);
+  const { user } = useContext(UserContext).user;
 
   useEffect(() => {
     socket.on('recive-message', (message) => {
       const newMessages = [...messages];
       newMessages.push(message);
-      sendMessage(newMessages);
-
+      setMessages(newMessages);
     });
-  }, [socket, room, messages, sendMessage]);
+  }, [socket, room, messages, setMessages]);
 
+  const getRoomMessages = useCallback(async () => {
+    const roomMessages = await Axios.get(`/messages/${room._id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + user.token,
+      }
+    }
+    );
+    setMessages(roomMessages.data);
+  }, [room]);
 
+  // useEffect send a request to /messages/:room_id to get room's messages
+  useEffect(() => {
+    getRoomMessages()
+  }, [getRoomMessages]);
+
+  if (!room._id) {
+    return <></>
+  }
   return (
     <ChatDiv>
+
       <header className="header-chat">
         <div className="avatar">
-          <FaUserCircle size={45} color={"#d1d1d1"} />
+          {
+            room.room_avatar !== 'undefined'
+              ?
+              <img src={room.room_avatar} alt="room" />
+              :
+              <FaUserCircle size={45} color={"#d1d1d1"} />
+          }
         </div>
         <span>{room.name}</span>
 
@@ -31,12 +57,7 @@ export function Chat({ socket, setRoomInfo, roomInfo }) {
           <HiMenu size={29} cursor={"pointer"} />
         </div>
       </header>
-      {room._id
-        ?
-        <Messages socket={socket} />
-        :
-        <h1>aaa</h1>
-      }
+      <Messages socket={socket} />
       <FormChat socket={socket} />
     </ChatDiv>
   )

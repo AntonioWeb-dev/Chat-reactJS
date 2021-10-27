@@ -15,6 +15,12 @@ export const ChatDiv = styled.div`
     align-items: center;
     font-family: "Roboto";
     box-shadow: -2px 2px 7px rgba(0, 0, 0, 0.1);
+    img {
+      object-fit: cover;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
     span {
       font-size: 20px;
     }
@@ -69,7 +75,7 @@ export const Message = styled.div`
     background: ${(props) => (props.sameUser ? "#407ee3" : "none")};
     margin: 3px 10px 4px 10px;
     min-height: 40px;
-    max-width: 200px;
+    max-width: 400px;
     word-wrap: break-word;
     border-radius: ${(props) => (props.sameUser ? "10px 10px 0px 10px" : "10px 10px 10px 0px")};
     text-align: ${(props) => (props.sameUser ? "end" : "initial")};
