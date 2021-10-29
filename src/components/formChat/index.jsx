@@ -1,4 +1,5 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import MicRecorder from 'mic-recorder-to-mp3';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { BsFiles, BsFillMicFill } from 'react-icons/bs';
 import { IoMdSend } from 'react-icons/io';
@@ -10,9 +11,11 @@ import { UserContext } from '../../context/userContext';
 export function FormChat({ socket }) {
   const [text, setText] = useState('');
   const { room, sendMessage } = useContext(ChatContext);
-  const { user } = useContext(UserContext).user;
+  const { user } = useContext(UserContext);
 
-
+  const [audioChunks, setAudioChunks] = useState([]);
+  const [blobURL, setBlobURL] = useState(false);
+  const [mediaRecorder, setMediaRecorder] = useState({});
   const mongoObjectId = function () {
     var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
     return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
@@ -20,12 +23,12 @@ export function FormChat({ socket }) {
     }).toLowerCase();
   };
 
+
   function handleSubmit(e) {
     e.preventDefault();
     if (!text) {
       return;
     }
-
     //create a message to send 
     const message = {
       content: text,
@@ -40,15 +43,59 @@ export function FormChat({ socket }) {
       _id: mongoObjectId(),
       date: new Date()
     }
-
     socket.emit("send-message", message);
     sendMessage(message);
     setText('');
   }
+
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+
+      const mediaRecord = new MediaRecorder(stream);
+      setMediaRecorder(mediaRecord);
+    })
+  }, [])
+
+  const startRecording = () => {
+    if (mediaRecorder.state !== 'inactive') {
+      mediaRecorder.stop()
+    } else {
+      mediaRecorder.start()
+      setBlobURL(false);
+    }
+
+  }
+  mediaRecorder.ondataavailable = (ev) => {
+    const chunk = [...audioChunks];
+    chunk.push(ev.data)
+    setAudioChunks(chunk);
+  }
+  mediaRecorder.onstop = (ev) => {
+    let blob = new Blob(audioChunks, { type: 'audio/webm;codecs=opus' });
+    let audioURL = URL.createObjectURL(blob);
+    setAudioChunks([]);
+    setBlobURL(audioURL);
+  }
+
+  const playAudio = () => {
+    const audio = new Audio(blobURL);
+    console.log(audio);
+    audio.play();
+  }
+
+
+
   return (
     <SendMessage onSubmit={handleSubmit}>
       <input type="text" name="text-message" value={text} autoComplete="off" placeholder="Escreva sua menssagem" onChange={e => setText(e.target.value)} />
-      <button>
+      {
+        blobURL
+          ?
+          <div type="button" onClick={playAudio}>play</div>
+          :
+          null
+      }
+      <button onClick={startRecording}>
         <BsFillMicFill size={25} color={"gray"} />
       </button>
       <button>

@@ -7,7 +7,7 @@ import { DivNewChat, FormRoom } from './style';
 
 
 export function NewChat({ handlerRoom, rooms, handleNewChat }) {
-  const { user } = useContext(UserContext).user;
+  const { user } = useContext(UserContext);
   const [createRoom, setCreateRoom] = useState(false);
   const [roomID, setRoomID] = useState('');
   const [roomName, setRoomName] = useState('');

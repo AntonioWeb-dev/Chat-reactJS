@@ -9,7 +9,6 @@ export const RoomsDiv = styled.div`
   grid-template-rows: ${(props) => (props.newChat ? "90px 10fr" : "1fr 6fr")};
   background-image: linear-gradient(#4267b2, #5865f2);
   color: white;
-  border-radius: 0px 15px 15px 0px;
   .header-room {
     font-family: "Open sans";
     display: ${(props) => (props.newChat ? "flex" : "grid")};

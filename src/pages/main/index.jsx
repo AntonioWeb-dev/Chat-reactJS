@@ -12,7 +12,7 @@ export default function Main() {
   const [roomSelected, setRoomSelected] = useState(undefined);
   const [roomInfo, setRoomInfo] = useState(false);
   const context = useContext(UserContext);
-  const { user } = context.user;
+  const { user } = context;
   const server = io('http://localhost:3100/', {
     auth: {
       userID: user.user_id,

@@ -9,7 +9,7 @@ import { DivMembers, DivRoomInfo } from './style';
 
 export function RoomInfo({ socket }) {
   const { room } = useContext(ChatContext);
-  const { user } = useContext(UserContext).user;
+  const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(true);
   const [members, setMembers] = useState([]);
   const history = useHistory();

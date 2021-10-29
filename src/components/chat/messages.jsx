@@ -6,7 +6,7 @@ import { Message, MessagesDiv } from './style';
 
 export function Messages() {
   const { room, messages, sendMessage } = useContext(ChatContext);
-  const { user } = useContext(UserContext).user;
+  const { user } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
 
 

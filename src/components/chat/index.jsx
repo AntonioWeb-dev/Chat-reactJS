@@ -10,7 +10,7 @@ import { UserContext } from '../../context/userContext';
 
 export function Chat({ socket, setRoomInfo, roomInfo }) {
   const { room, messages, setMessages } = useContext(ChatContext);
-  const { user } = useContext(UserContext).user;
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     socket.on('recive-message', (message) => {
@@ -40,7 +40,6 @@ export function Chat({ socket, setRoomInfo, roomInfo }) {
   }
   return (
     <ChatDiv>
-
       <header className="header-chat">
         <div className="avatar">
           {

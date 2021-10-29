@@ -4,14 +4,15 @@ import Home from "../pages/home";
 import LoginPage from "../pages/login";
 import RegisterPage from "../pages/register";
 import Main from "../pages/main";
+import { MyRoute } from "./PrivateRoute";
 
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/login" component={LoginPage} />
-      <Route exact path="/register" component={RegisterPage} />
-      <Route exact path="/chat" component={Main} />
+      <MyRoute exact path="/login" component={LoginPage} />
+      <MyRoute exact path="/register" component={RegisterPage} />
+      <MyRoute exact path="/chat" component={Main} isPrivate />
+      <MyRoute exact path="/" component={Home} />
     </Switch>
   );
 }

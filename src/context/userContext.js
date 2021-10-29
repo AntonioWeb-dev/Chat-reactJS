@@ -11,7 +11,7 @@ function userReducer(state, action) {
     case "LOGIN":
       return {
         ...state,
-        user: action.user,
+        user: { ...action.user },
       };
     case "LOGOUT":
       return {
@@ -54,7 +54,7 @@ function UserProvider(props) {
     dispatch({ type: "LOGOUT", user: {} });
   }
 
-  return <UserContext.Provider value={{ user: state, login, logout }} {...props} />;
+  return <UserContext.Provider value={{ user: state.user, login, logout }} {...props} />;
 }
 
 export { UserContext, UserProvider };

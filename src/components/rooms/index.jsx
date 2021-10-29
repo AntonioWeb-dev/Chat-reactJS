@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Room } from "../../components/room";
 import { FaUserCircle } from 'react-icons/fa';
-import { HiMenu } from 'react-icons/hi';
+import { ImExit } from 'react-icons/im';
 import { SiGooglemessages } from 'react-icons/si';
 import { ImSearch } from 'react-icons/im';
 import { RoomsDiv } from './style';
@@ -11,7 +12,8 @@ import { NewChat } from '../newChat';
 export function Rooms({ socket }) {
   const [rooms, setRooms] = useState([]);
   const [newChat, setNewChat] = useState(false);
-  const { user } = useContext(UserContext).user;
+  const { user, logout } = useContext(UserContext);
+  const history = useHistory();
 
   useEffect(() => {
     socket.on("yourRooms", (rooms) => {
@@ -39,6 +41,10 @@ export function Rooms({ socket }) {
     }
   }, [socket, rooms, setRooms]);
 
+  const handleLogout = () => {
+    logout();
+    history.push('/');
+  }
   return (
     <RoomsDiv newChat={newChat} >
       <header className="header-room">
@@ -55,8 +61,8 @@ export function Rooms({ socket }) {
           <div >
             <SiGooglemessages onClick={e => setNewChat(!newChat)} size={25} cursor={"pointer"} />
           </div>
-          <div>
-            <HiMenu size={29} cursor={"pointer"} />
+          <div onClick={handleLogout}>
+            <ImExit size={23} cursor={"pointer"} />
           </div>
         </div>
         {
@@ -85,7 +91,6 @@ export function Rooms({ socket }) {
                 room={room}
               />
             )
-
         }
       </div>
     </RoomsDiv>

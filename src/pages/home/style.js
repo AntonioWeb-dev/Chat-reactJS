@@ -15,27 +15,7 @@ export const Container = styled.div`
       display: flex;
       width: 35%;
     }
-    nav {
-      padding: 16px 0px 0px 66px;
-    }
-    nav ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 35px;
-    }
-    .items-nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-    }
-    .items-nav a:active,
-    .items-nav a {
-      font-family: "Poppins", sans-serif;
-      text-decoration: none;
-      color: #525652;
-    }
+
     #title {
       font-size: 44px;
       font-family: "Poppins", sans-serif;
@@ -67,8 +47,23 @@ export const Container = styled.div`
       font-size: 20px;
     }
   }
+  #main-image {
+    animation-name: fadeInImage;
+    animation-duration: 1s;
+    animation-timing-function: ease-in;
+    @keyframes fadeInImage {
+      from {
+        margin-left: 500px;
+        opacity: 0;
+      }
+      to {
+        margin-left: 0px;
+        opacity: 1;
+      }
+    }
+  }
   .main {
-    margin-top: 150px;
+    margin-top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,6 +83,20 @@ export const Container = styled.div`
       width: 550px;
       font-weight: bold;
       font-family: "Poppins", sans-serif;
+
+      animation-name: fadeInMainPhrase;
+      animation-duration: 1s;
+      animation-timing-function: ease-in;
+      @keyframes fadeInMainPhrase {
+        from {
+          margin-top: 100px;
+          opacity: 0;
+        }
+        to {
+          margin-top: 0px;
+          opacity: 1;
+        }
+      }
     }
     .main-phrase span {
       font-size: 22px;
