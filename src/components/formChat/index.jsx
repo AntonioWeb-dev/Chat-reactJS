@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import MicRecorder from 'mic-recorder-to-mp3';
+import { v4 as uuid } from 'uuid';
 import { AiOutlineCamera } from 'react-icons/ai';
 import { BsFiles, BsFillMicFill } from 'react-icons/bs';
 import { IoMdSend } from 'react-icons/io';
@@ -16,6 +16,7 @@ export function FormChat({ socket }) {
   const [audioChunks, setAudioChunks] = useState([]);
   const [blobURL, setBlobURL] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState({});
+  const [timeRecording, setTimeRecording] = useState(0);
   const mongoObjectId = function () {
     var timestamp = (new Date().getTime() / 1000 | 0).toString(16);
     return timestamp + 'xxxxxxxxxxxxxxxx'.replace(/[x]/g, function () {
@@ -50,21 +51,23 @@ export function FormChat({ socket }) {
 
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-
       const mediaRecord = new MediaRecorder(stream);
       setMediaRecorder(mediaRecord);
-    })
+    });
   }, [])
 
   const startRecording = () => {
     if (mediaRecorder.state !== 'inactive') {
       mediaRecorder.stop()
+      const time = new Date().getTime() - timeRecording;
+      setTimeRecording(time);
     } else {
       mediaRecorder.start()
+      setTimeRecording(new Date().getTime());
       setBlobURL(false);
     }
-
   }
+
   mediaRecorder.ondataavailable = (ev) => {
     const chunk = [...audioChunks];
     chunk.push(ev.data)
@@ -72,6 +75,16 @@ export function FormChat({ socket }) {
   }
   mediaRecorder.onstop = (ev) => {
     let blob = new Blob(audioChunks, { type: 'audio/webm;codecs=opus' });
+    const file = new File([blob], `${uuid()}-AUDIO.webm`);
+    file.start = 0
+    file.end = timeRecording
+    const audioObj = {
+      name: file.name,
+      size: file.size,
+      room_id: room._id,
+      body: file,
+    }
+    socket.emit('audio-message', audioObj);
     let audioURL = URL.createObjectURL(blob);
     setAudioChunks([]);
     setBlobURL(audioURL);
@@ -79,7 +92,6 @@ export function FormChat({ socket }) {
 
   const playAudio = () => {
     const audio = new Audio(blobURL);
-    console.log(audio);
     audio.play();
   }
 
