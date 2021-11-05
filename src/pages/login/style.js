@@ -44,4 +44,13 @@ export const LoginForm = styled.form`
       }
     }
   }
+
+  @media (max-width: 890px) {
+    height: 100%;
+    width: 100%;
+
+    .container-form {
+      height: 63%;
+    }
+  }
 `;

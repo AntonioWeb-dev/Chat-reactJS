@@ -9,19 +9,7 @@ function Home() {
         <div className="menu">
 
           <h1 id="title">NextWorld</h1>
-          <nav>
-            <ul>
-              <Li className="items-nav" selected>
-                <Link to="/">Home</Link>
-              </Li>
-              <Li className="items-nav">
-                <Link to="/">Contato</Link>
-              </Li>
-              <Li className="items-nav">
-                <Link to="/">Serviços</Link>
-              </Li>
-            </ul>
-          </nav>
+
         </div>
         <div className="login-button">
           <button>

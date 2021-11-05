@@ -1,13 +1,13 @@
 import { DivInput } from "./styled";
 
-export function InputText({ NameInput, handleChange, Value }) {
+export function InputText({ NameInput, handleChange, Value, typeInput }) {
     return (
         <DivInput>
             <label htmlFor={NameInput}>
                 {NameInput}
             </label>
             <input
-                type="text"
+                type={typeInput}
                 id={NameInput}
                 name={NameInput}
                 onChange={(event) => handleChange(event.target.value)}

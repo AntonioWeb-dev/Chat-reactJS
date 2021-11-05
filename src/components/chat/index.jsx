@@ -1,220 +1,63 @@
-import { FaUserCircle } from 'react-icons/fa';
+import { useCallback, useContext, useEffect } from 'react';
+import { Axios } from '../../services/axios';
 import { HiMenu } from 'react-icons/hi';
-import { ChatDiv, MessagesDiv, Message, SendMessage } from "./style";
-import { AiOutlineSend } from "react-icons/ai";
+import { FormChat } from "../formChat";
+import { FaUserCircle } from 'react-icons/fa';
+import { ChatDiv } from "./style";
+import { ChatContext } from '../../context/chatContext';
+import { Messages } from './messages';
+import { UserContext } from '../../context/userContext';
 
-const messages = [
-    {
-        sender_name: "ixi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "guest",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola1",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "Rocki",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "gabi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola3",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "junior",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "ixi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "guest",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola1",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "Rocki",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "gabi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola3",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "junior",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "ixi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "guest",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola1",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "Rocki",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "gabi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola3",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "junior",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "ixi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "guest",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola1",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "Rocki",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "gabi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola3",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "junior",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "ixi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "guest",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola1",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "Rocki",
-        sender_id: "a8d9a9dkad9ak44444",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "gabi",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "ola3",
-        createdAt: "2021-10-9"
-    },
-    {
-        sender_name: "junior",
-        sender_id: "a8d9a9dkad9ak-dam9da762k",
-        room_id: "a8d9a9dkad9ak",
-        content: "olaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-        createdAt: "2021-10-9"
-    },
-]
+export function Chat({ socket, setRoomInfo, roomInfo }) {
+  const { room, messages, setMessages } = useContext(ChatContext);
+  const { user } = useContext(UserContext);
 
-const user = {
-    id: "a8d9a9dkad9ak44444",
-    email: "pessoaj420@gmail.com"
-}
+  useEffect(() => {
+    socket.on('recive-message', (message) => {
+      const newMessages = [...messages];
+      newMessages.push(message);
+      setMessages(newMessages);
+    });
+  }, [socket, room, messages, setMessages]);
 
-export function Chat({ Name }) {
-    return (
-        <ChatDiv>
-            <header className="header-chat">
-                <div className="avatar">
-                    <FaUserCircle size={45} color={"#0078e7"} />
-                </div>
-                <span>
-                    {Name}
-                </span>
+  const getRoomMessages = useCallback(async () => {
+    const roomMessages = await Axios.get(`/messages/${room._id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + user.token,
+      }
+    }
+    );
+    setMessages(roomMessages.data);
+  }, [room]);
 
-                <div>
-                    <HiMenu size={29} />
-                </div>
-            </header>
-            <MessagesDiv>
-                {messages.map(message => (
-                    <Message sameUser={message.sender_id === user.id} >
-                        <div className="message-content">
-                            <span>{message.sender_id === user.id ? "Você" : message.sender_name}</span>
-                            <p>{message.content}</p>
-                        </div>
-                    </Message>
-                ))}
-            </MessagesDiv>
-            <SendMessage>
-                <input type="text" />
-                <button><AiOutlineSend color={"#71b0eb"} size={38} /></button>
-            </SendMessage>
-        </ChatDiv>
-    )
+  // useEffect send a request to /messages/:room_id to get room's messages
+  useEffect(() => {
+    getRoomMessages()
+  }, [getRoomMessages]);
+
+  if (!room._id) {
+    return <></>
+  }
+  return (
+    <ChatDiv>
+      <header className="header-chat">
+        <div className="avatar">
+          {
+            room.room_avatar !== 'undefined'
+              ?
+              <img src={room.room_avatar} alt="room" />
+              :
+              <FaUserCircle size={45} color={"#d1d1d1"} />
+          }
+        </div>
+        <span>{room.name}</span>
+
+        <div onClick={e => setRoomInfo(!roomInfo)}>
+          <HiMenu size={29} cursor={"pointer"} />
+        </div>
+      </header>
+      <Messages socket={socket} />
+      <FormChat socket={socket} />
+    </ChatDiv>
+  )
 }

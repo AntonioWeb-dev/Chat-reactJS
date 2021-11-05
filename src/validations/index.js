@@ -1,24 +1,28 @@
 import { isEmail } from "validator";
 export const emailValidation = (email) => {
   if (!email || !isEmail(email)) {
-    return "Email invalido";
+    return true;
   }
+  return false;
 };
 
 export const nameValidation = (name) => {
   if (!name || name.length < 3) {
-    return "Nome invalido";
+    return true;
   }
+  return false;
 };
 
 export const passwordValidation = (password) => {
   if (!password || password.length < 8) {
-    return "Senha invalida";
+    return true;
   }
+  return false;
 };
 
 export const passwordMatchValidation = (password, confirmPassword) => {
   if (password !== confirmPassword || !confirmPassword) {
-    return "Senha incorreta";
+    return true;
   }
+  return false;
 };
