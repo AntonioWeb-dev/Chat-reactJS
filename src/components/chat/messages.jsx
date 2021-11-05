@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import { ChatContext } from '../../context/chatContext';
 import { UserContext } from '../../context/userContext';
+import { AudioMessage } from './audioMessage';
 import { Message, MessagesDiv } from './style';
 
 export function Messages() {
   const { room, messages, sendMessage } = useContext(ChatContext);
   const { user } = useContext(UserContext);
+  const [audio, setAudio] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
 
 
@@ -16,9 +18,11 @@ export function Messages() {
     const divMessages = document.getElementById("Messages");
     divMessages.scrollTop = divMessages.scrollHeight;
   }
+
   useEffect(() => {
     scrollingDown()
   }, [sendMessage]);
+
 
 
   // All rooms recive the message because i joined all of rooms, so there is a codition 
@@ -42,7 +46,17 @@ export function Messages() {
             </div>
             <div className="message-content">
               <span>{message.sender._id === user.user_id ? "Você" : message.sender.name}</span>
-              <p>{message.content}</p>
+              {message.type === 'AUDIO'
+                ?
+                <AudioMessage
+                  audioBlob={message.content}
+                  audio={audio}
+                  setAudio={setAudio}
+                  id={message._id}
+                />
+                :
+                <p>{message.content}</p>
+              }
             </div>
           </Message>
           :

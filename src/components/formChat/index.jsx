@@ -42,6 +42,7 @@ export function FormChat({ socket }) {
       isResponse: false,
       room_id: room._id,
       _id: mongoObjectId(),
+      type: "TEXT",
       date: new Date()
     }
     socket.emit("send-message", message);
@@ -76,16 +77,25 @@ export function FormChat({ socket }) {
   mediaRecorder.onstop = (ev) => {
     let blob = new Blob(audioChunks, { type: 'audio/webm;codecs=opus' });
     const file = new File([blob], `${uuid()}-AUDIO.webm`);
-    file.start = 0
-    file.end = timeRecording
-    const audioObj = {
-      name: file.name,
-      size: file.size,
-      room_id: room._id,
-      body: file,
-    }
-    socket.emit('audio-message', audioObj);
     let audioURL = URL.createObjectURL(blob);
+    file.duration = timeRecording;
+
+    const audioMessage = {
+      _id: mongoObjectId(),
+      type: "AUDIO",
+      content: audioURL,
+      sender: {
+        name: user.name,
+        _id: user.user_id,
+        avatar: user.avatar,
+        email: user.email,
+      },
+      isResponse: false,
+      room_id: room._id,
+      date: new Date()
+    }
+    socket.emit('audio-message', audioMessage, file, timeRecording);
+    sendMessage(audioMessage);
     setAudioChunks([]);
     setBlobURL(audioURL);
   }

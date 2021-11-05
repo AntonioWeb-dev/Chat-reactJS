@@ -75,11 +75,12 @@ export const Message = styled.div`
     background: ${(props) => (props.sameUser ? "#407ee3" : "none")};
     margin: 3px 10px 4px 10px;
     min-height: 40px;
-    max-width: 400px;
+    max-width: 600px;
     word-wrap: break-word;
     border-radius: ${(props) => (props.sameUser ? "10px 10px 0px 10px" : "10px 10px 10px 0px")};
     text-align: ${(props) => (props.sameUser ? "end" : "initial")};
     padding: 3px;
+    display: grid;
     span {
       padding: 8px;
       font-size: 15px;
