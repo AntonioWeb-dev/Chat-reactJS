@@ -50,6 +50,7 @@ export function Messages() {
                 ?
                 <AudioMessage
                   audioBlob={message.content}
+                  duration={message?.duration}
                   audio={audio}
                   setAudio={setAudio}
                   id={message._id}

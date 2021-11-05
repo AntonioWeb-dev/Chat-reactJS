@@ -78,7 +78,7 @@ export function FormChat({ socket }) {
     let blob = new Blob(audioChunks, { type: 'audio/webm;codecs=opus' });
     const file = new File([blob], `${uuid()}-AUDIO.webm`);
     let audioURL = URL.createObjectURL(blob);
-    file.duration = timeRecording;
+
 
     const audioMessage = {
       _id: mongoObjectId(),
@@ -90,6 +90,7 @@ export function FormChat({ socket }) {
         avatar: user.avatar,
         email: user.email,
       },
+      duration: timeRecording,
       isResponse: false,
       room_id: room._id,
       date: new Date()
