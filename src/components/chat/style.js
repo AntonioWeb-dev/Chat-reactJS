@@ -72,7 +72,7 @@ export const Message = styled.div`
     }
   }
   .message-content {
-    background: ${(props) => (props.sameUser ? "#407ee3" : "none")};
+    background: ${(props) => (props.sameUser ? "#407ee3" : "#ddd")};
     margin: 3px 10px 4px 10px;
     min-height: 40px;
     max-width: 600px;
@@ -80,12 +80,11 @@ export const Message = styled.div`
     border-radius: ${(props) => (props.sameUser ? "10px 10px 0px 10px" : "10px 10px 10px 0px")};
     text-align: ${(props) => (props.sameUser ? "end" : "initial")};
     padding: 3px;
-    display: grid;
     span {
       padding: 8px;
       font-size: 15px;
       font-weight: bold;
-      color: #e3d040;
+      color: ${(props) => (props.sameUser ? "white" : "#407ee3")};
     }
 
     p {
