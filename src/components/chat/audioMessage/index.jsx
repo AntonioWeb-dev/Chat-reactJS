@@ -40,7 +40,6 @@ export function AudioMessage({ audioBlob, audio, setAudio, id, duration }) {
       setIsPlaying(false);
     }
   }, [setAudio, audio, isPlaying, id]);
-  console.log(duration);
 
   return (
     <AudioDiv duration={duration} play={isPlaying}>
